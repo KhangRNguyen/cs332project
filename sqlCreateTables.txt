@@ -1,0 +1,26 @@
+CREATE TABLE professor(
+	ssn MEDIUMINT NOT NULL ,
+    title VARCHAR(100) ,
+    name VARCHAR(100) ,
+    street VARCHAR(100) ,
+    city VARCHAR(100) ,
+    state VARCHAR(40) ,
+    zip SMALLINT ,
+    sex VARCHAR(1) ,
+    area_code SMALLINT ,
+    phone_num MEDIUMINT ,
+    salary MEDIUMINT ,
+    PRIMARY KEY ( ssn )
+   );
+
+CREATE TABLE department(
+	d_num INT NOT NULL,	
+	location VARCHAR(100) ,
+	d_name VARCHAR(50) ,
+	chair_ssn MEDIUMINT ,
+	d_studentID MEDIUMINT,
+	PRIMARY KEY ( d_num ),
+	FORIEGN KEY ( d_studentID ) REFERENCES student (cwid )
+	);
+	
+
