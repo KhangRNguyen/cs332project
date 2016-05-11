@@ -1,26 +1,60 @@
 CREATE TABLE professor(
-	ssn MEDIUMINT NOT NULL ,
-    title VARCHAR(100) ,
+    ssn MEDIUMINT NOT NULL ,
     name VARCHAR(100) ,
     street VARCHAR(100) ,
     city VARCHAR(100) ,
     state VARCHAR(40) ,
     zip SMALLINT ,
-    sex VARCHAR(1) ,
     area_code SMALLINT ,
     phone_num MEDIUMINT ,
+    sex VARCHAR(1) ,
+    title VARCHAR(100) ,
     salary MEDIUMINT ,
     PRIMARY KEY ( ssn )
    );
 
 CREATE TABLE department(
-	d_num INT NOT NULL,	
-	location VARCHAR(100) ,
-	d_name VARCHAR(50) ,
-	chair_ssn MEDIUMINT ,
-	d_studentID MEDIUMINT,
-	PRIMARY KEY ( d_num ),
-	FORIEGN KEY ( d_studentID ) REFERENCES student (cwid )
-	);
-	
-
+    d_no MEDIUMINT NOT NULL,
+    d_name VARCHAR (100),
+    d_phone MEDIUMINT,
+    location VARCHAR (100),
+    chairperson MEDIUMINT,
+    FOREIGN KEY ( chairperson ) REFERENCES professor( ssn ),
+    PRIMARY KEY (d_no)
+    );
+    
+CREATE TABLE course(
+    c_no MEDIUMINT NOT NULL,
+    c_title VARCHAR (100),
+    textbook VARCHAR (100),
+    unit INT,
+    c_d_number MEDIUMINT,
+    FOREIGN KEY (MEDIUMINT) REFERENCES department (d_no),
+    PRIMARY KEY(c_no);
+    );
+    
+CREATE TABLE section(
+    s_no MEDIUMINT NOT NULL,
+    classroom INT,
+    days VARCHAR(2),
+    b_time MEDIUMINT,
+    e_time MEDIUMINT,
+    seats INT,
+    s_professor MEDIUMINT,
+    course_no MEDIUMINT,
+    FOREIGN KEY (course_no ) REFERNCES course(c_no),
+    FOREIGN KEY (s_professor) REFERENCES professor(ssn),
+    PRIMARY KEY (s_no)
+    );
+    
+CREATE TABLE student(
+    cwid MEDIUMINT NO NULL,
+    f_name VARCHAR(40),
+    l_name VARCHAR(40),
+    s_address VARCHAR(50),
+    s_phone MEDIUMINT,
+    major VARCHAR(40),
+    PRIMARY KEY (cwid)
+    );
+    
+    
