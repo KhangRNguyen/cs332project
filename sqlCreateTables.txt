@@ -29,7 +29,7 @@ CREATE TABLE course(
     textbook VARCHAR (100),
     unit INT,
     c_d_number MEDIUMINT,
-    FOREIGN KEY (MEDIUMINT) REFERENCES department (d_no),
+    FOREIGN KEY (c_d_number) REFERENCES department (d_no),
     PRIMARY KEY(c_no);
     );
     
