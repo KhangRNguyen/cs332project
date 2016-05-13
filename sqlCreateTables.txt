@@ -30,7 +30,7 @@ CREATE TABLE course(
     unit INT,
     c_d_number MEDIUMINT,
     FOREIGN KEY (MEDIUMINT) REFERENCES department (d_no),
-    PRIMARY KEY(c_no);
+    PRIMARY KEY(c_no)
     );
     
 CREATE TABLE section(
@@ -42,13 +42,13 @@ CREATE TABLE section(
     seats INT,
     s_professor MEDIUMINT,
     course_no MEDIUMINT,
-    FOREIGN KEY (course_no ) REFERNCES course(c_no),
+    FOREIGN KEY (course_no ) REFERENCES course(c_no),
     FOREIGN KEY (s_professor) REFERENCES professor(ssn),
     PRIMARY KEY (s_no)
     );
     
 CREATE TABLE student(
-    cwid MEDIUMINT NO NULL,
+    cwid MEDIUMINT NOT NULL,
     f_name VARCHAR(40),
     l_name VARCHAR(40),
     s_address VARCHAR(50),
