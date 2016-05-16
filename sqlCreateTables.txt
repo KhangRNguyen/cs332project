@@ -30,7 +30,7 @@ CREATE TABLE course(
     unit INT,
     c_d_number MEDIUMINT,
     FOREIGN KEY (MEDIUMINT) REFERENCES department (d_no),
-    PRIMARY KEY(c_no);
+    PRIMARY KEY(c_no)
     );
     
 CREATE TABLE section(
