@@ -29,32 +29,61 @@ CREATE TABLE course(
     textbook VARCHAR (100),
     unit INT,
     c_d_number MEDIUMINT,
-    FOREIGN KEY (MEDIUMINT) REFERENCES department (d_no),
-    PRIMARY KEY(c_no);
+    FOREIGN KEY ( c_d_number ) REFERENCES department (d_no),
+    PRIMARY KEY(c_no)
     );
     
 CREATE TABLE section(
     s_no MEDIUMINT NOT NULL,
     classroom INT,
-    days VARCHAR(2),
+    days VARCHAR(3),
     b_time MEDIUMINT,
     e_time MEDIUMINT,
     seats INT,
     s_professor MEDIUMINT,
     course_no MEDIUMINT,
-    FOREIGN KEY (course_no ) REFERNCES course(c_no),
+    FOREIGN KEY (course_no ) REFERENCES course(c_no),
     FOREIGN KEY (s_professor) REFERENCES professor(ssn),
     PRIMARY KEY (s_no)
     );
     
 CREATE TABLE student(
-    cwid MEDIUMINT NO NULL,
+    cwid MEDIUMINT NOT NULL,
     f_name VARCHAR(40),
     l_name VARCHAR(40),
     s_address VARCHAR(50),
     s_phone MEDIUMINT,
-    major VARCHAR(40),
+    major MEDIUMINT,
+    FOREIGN KEY ( major ) REFERENCES department (d_no),
     PRIMARY KEY (cwid)
     );
     
+CREATE TABLE enrollment_record(
+    r_cwid MEDIUMINT,
+    r_s_no MEDIUMINT,
+    grade VARCHAR(2),
+    r_c_no MEDIUMINT,
+    FOREIGN KEY (cr_c_no ) REFERENCES course(c_no),
+    FOREIGN KEY (r_cwid ) REFERENCES student(cwid),
+    FOREIGN KEY (r_s_no) REFERENCES section(s_no)
+    );
     
+CREATE TABLE prof_degrees(
+    p_ssn MEDIUMINT,
+    degree VARCHAR(64),
+    FOREIGN KEY (p_ssn ) REFERENCES professor(ssn)
+    );
+    
+CREATE TABLE minor(
+    m_cwid MEDIUMINT,
+    m_d_no MEDIUMINT,
+    FOREIGN KEY (m_cwid ) REFERENCES student(cwid),
+    FOREIGN KEY (m_d_no) REFERENCES department(d_no)
+    );
+    
+CREATE TABLE prerequisite(
+    pre_c_no MEDIUMINT,
+    pre_p_no MEDIUMINT,
+    FOREIGN KEY (pre_c_no ) REFERENCES course(c_no),
+    FOREIGN KEY (pre_p_no) REFERENCES course(c_no)
+    );
